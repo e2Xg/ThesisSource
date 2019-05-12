@@ -5,7 +5,7 @@ from Source.Aerodynamics.standard_atmosphere import standard_atmosphere
 from Source.Engine.engine_performance import  engine_performance
 
 def maximum_mach_number(altitude, setting, reference_area, ac_weight, engine_input, aerodynamic_data, design_input):
-    mach = 2.0
+    mach = 1.9
     dt = 30.0
     num_eng = design_input.loc["Total Number of Engines","Value"]
     sos, rho, mu = standard_atmosphere(altitude)
