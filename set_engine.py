@@ -4,7 +4,7 @@ from Source.engine_input import engine_input
 
 from Source.Main.save import save
 
-engine_input = engine_input("Raymer_Afterburning_Jet_Engine.csv")
+engine_input = engine_input("RaymerEngineScaledForF106.csv")
 
 #Save Data
-save('engine_input.pydata', engine_input)
+save('engine_inputF106class.pydata', engine_input)
