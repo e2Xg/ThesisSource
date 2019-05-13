@@ -29,4 +29,5 @@ def engine_performance(engine_input,number_of_engines,altitude,mach,setting):
     FF_sp, NPF_sp = reduce_data(engine_data,setting_p,altitude,mach)
     FF = np.interp(setting,[setting_m,setting_p],[FF_sm,FF_sp])
     NPF = np.interp(setting,[setting_m,setting_p],[NPF_sm,NPF_sp])
+    if NPF < 0.0: NPF = 0.0
     return number_of_engines*FF, number_of_engines*NPF*9.81
