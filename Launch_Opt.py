@@ -69,7 +69,7 @@ if __name__ == "__main__":
     results = open("optimization_results.csv","r")
     resultslines = results.readlines()
     #Run each case again to save results
-    vsppath = "C:\\Users\\t19254\\Desktop\\vspscript.exe"
+    vsppath = "D:\VSP\\vspscript.exe"
     for i in range(len(resultslines)-1):
         result = resultslines[i+1].split(";")
         variables = [
