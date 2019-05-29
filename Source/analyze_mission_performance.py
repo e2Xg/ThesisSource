@@ -4,6 +4,7 @@ import copy
 import pandas as pd
 
 from Source.Performance.Mission.fly_distance import fly_distance
+from Source.Performance.Mission.fly_setting import fly_setting
 from Source.Performance.Mission.spend import spend
 from Source.Performance.Mission.takeoff import takeoff
 from Source.Performance.Mission.accelerate import accelerate
@@ -67,6 +68,16 @@ def analyze_mission_performance(mission_input ,design_input, engine_input, geome
             totaltime += time
             totalfuel += fuel
             mission_performance_data.loc[index+1] = [mission_input.loc[index,"Name"], ac_weight, fuel, x, time, mach, altitude, relative_x_position, totaltime, totalfuel]
+            
+        elif mission_input.loc[index,"Name"] == "FLY_SETTING":
+            if parameters[0] < 0.0: parameters[0] = mach
+            if parameters[1] < 0.0: parameters[1] = altitude
+            ac_weight, fuel, x, time, mach, altitude = fly_setting(parameters[0], parameters[1], parameters[2], parameters[3], reference_area, ac_weight, engine_input, aerodynamic_data, design_input)
+            relative_x_position += x
+            totaltime += time
+            totalfuel += fuel
+            mission_performance_data.loc[index+1] = [mission_input.loc[index,"Name"], ac_weight, fuel, x, time, mach, altitude, relative_x_position, totaltime, totalfuel]
+            
             
         elif mission_input.loc[index,"Name"] == "INSTANTANEOUS_TURN":
             if parameters[0] < 0.0: parameters[0] = mach
