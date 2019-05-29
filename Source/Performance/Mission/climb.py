@@ -46,6 +46,7 @@ def climb(mach, altitude0, altitude1, setting, reference_area, ac_weight, engine
         time += acctime
     #Climb
     while altitude < altitude1:
+        sos, rho, mu = standard_atmosphere(altitude)
         FF , NPF = engine_performance(engine_input, num_eng, altitude, mach, setting)
         cl = (ac_weight*9.81)/(reference_area*0.5*rho*((mach*sos)**2))
         drag, CD0, K = total_drag_estimation(
@@ -58,9 +59,9 @@ def climb(mach, altitude0, altitude1, setting, reference_area, ac_weight, engine
         T = NPF - drag
         W = ac_weight*9.81
         SEP_ = (T/W)*mach*sos
-        sos, rho, mu = standard_atmosphere(altitude)
         climb_grad = SEP_ / (mach*sos)
-        climb_angle = np.arcsin(climb_grad)
+        if abs(climb_grad) > 1.0: climb_angle = climb_grad
+        else: climb_angle = np.arcsin(climb_grad)
         Vx = mach*sos*np.cos(climb_angle)
         Vy = mach*sos*np.sin(climb_angle)
         if altitude + Vy*dt > altitude1: dt = (altitude1 - altitude)/Vy
