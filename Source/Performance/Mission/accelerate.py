@@ -29,4 +29,5 @@ def accelerate(mach0, altitude, mach1, setting, reference_area, ac_weight, engin
         ac_weight -= FF*dt
         fuel += FF*dt
         x += mach*sos*dt
+    if mach > mach1: mach = mach1
     return ac_weight, fuel, x/1000.0, time, mach, altitude
