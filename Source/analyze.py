@@ -67,7 +67,7 @@ def analyze(design_input,geometry_input,engine_input,point_performance_input=Non
             DF = geometry_data[tag]["Data"].loc["Max Depth","Value"]
             SWTFU = geometry_data[tag]["Data"].loc["Wetted Surface Area","Value"]
             FPAREA = WF*XL
-            TOTVOLFUSF = (geometry_data[tag]["Data"].loc["Theoretical Volume","Value"] - design_input.loc["Main Systems Volume","Value"] - geometry_input[tag]["Total Capture Area"]*geometry_input[tag]["Plug Length"] - 0.35*geometry_data[tag]["Data"].loc["Theoretical Volume","Value"])*(design_input.loc["Fuselage Fuel Volume Ratio","Value"]/100.0)
+            TOTVOLFUSF = (geometry_data[tag]["Data"].loc["Theoretical Volume","Value"] - design_input.loc["Main Systems Volume","Value"] - 0.35*geometry_data[tag]["Data"].loc["Theoretical Volume","Value"])*(design_input.loc["Fuselage Fuel Volume Ratio","Value"]/100.0)
         elif geometry_data[tag]["Type"] == "Wing":
             TR = geometry_data[tag]["Data"].loc["Planform Taper Ratio","Value"]
             SPAN = geometry_data[tag]["Data"].loc["Planform Span","Value"]
