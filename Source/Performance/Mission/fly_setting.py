@@ -5,7 +5,7 @@ from Source.Aerodynamics.standard_atmosphere import standard_atmosphere
 from Source.Engine.engine_performance import  engine_performance
 
 
-def fly_setting(mach, altitude, distance, setting, reference_area, ac_weight, engine_input, aerodynamic_data, design_input, dt = 600.0):
+def fly_setting(mach, altitude, distance, setting, reference_area, ac_weight, engine_input, aerodynamic_data, design_input, dt = 60.0):
     distance = distance*1000
     num_eng = design_input.loc["Total Number of Engines","Value"]
     sos, rho, mu = standard_atmosphere(altitude)
@@ -24,6 +24,8 @@ def fly_setting(mach, altitude, distance, setting, reference_area, ac_weight, en
         FF , NPF = engine_performance(engine_input, num_eng, altitude,mach,setting)
         if mach*sos*dt+x > distance: dt = (distance-x)/(mach*sos)
         if mach*sos*dt+x <= x: break
+        a = (NPF - drag)/(ac_weight)
+        mach = (mach*sos + a*dt)/sos
         time += dt
         ac_weight -= FF*dt
         fuel += FF*dt
