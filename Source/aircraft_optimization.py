@@ -8,7 +8,7 @@ from Source.Optimization.optimization_objectives import optimization_objectives
 def aircraft_optimization(design_input, geometry_input, engine_input, mission_input, point_performance_input, numcore = 4, iterations = 1000):
     problem = Problem(4,2,3)
     problem.types[:] = [
-                Real(9.0, 11.5),
+                Real(9.0, 12.5),
                 Real(5.0, 8.0),
                 Real(0.1, 0.25),
                 Real(35.0, 50.0)
