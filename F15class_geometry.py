@@ -25,13 +25,17 @@ add_general_xsec(x_location =  4.79981, z_location =  0.83125, height = 1.94292,
                  bot_tan_angle = 90.0, top_str = 0.82889, bot_str = 0.56448, up_str = 0.83, low_str = 0.83, geometry = geometry_input, tag="Fuselage")
 add_general_xsec(x_location =  5.58161, z_location =  0.66315, height = 1.64465, width = 2.24705, max_width_loc = -0.31818, top_tan_angle = 26.18182,
                  bot_tan_angle = 90.0, top_str = 0.82889, bot_str = 0.56448, up_str = 0.83, low_str = 0.83, geometry = geometry_input, tag="Fuselage")
-add_general_xsec(x_location =  6.23832, z_location =  0.43185, height = 1.20433, width = 3.0, max_width_loc = 0.03636, top_tan_angle = 50.31818,
+add_general_xsec(x_location =  6.23832, z_location =  0.43185, height = 1.20433, width = 3.5, max_width_loc = 0.03636, top_tan_angle = 50.31818,
                  bot_tan_angle = 72.81818, top_str = 0.92135, bot_str = 1.47365, up_str = 0.89836, low_str =1.29764, geometry = geometry_input, tag="Fuselage")
-add_general_xsec(x_location =  7.72401, z_location =  0.49488, height = 1.32415, width = 3.0, max_width_loc = 0.03636, top_tan_angle = 50.31818,
+add_general_xsec(x_location =  7.0, z_location =  0.49488, height = 1.32415, width = 3.5, max_width_loc = 0.03636, top_tan_angle = 50.31818,
                  bot_tan_angle = 72.81818, top_str = 0.92135, bot_str = 1.47365, up_str = 0.89836, low_str = 1.29764, geometry = geometry_input, tag="Fuselage")
-add_general_xsec(x_location =  9.20970, z_location =  0.48059, height = 1.42601, width = 3.0, max_width_loc = 0.03636, top_tan_angle = 61.77273, 
+add_general_xsec(x_location =  7.4, z_location =  0.49488, height = 1.32415, width = 3.5, max_width_loc = 0.03636, top_tan_angle = 50.31818,
                  bot_tan_angle = 72.81818, top_str = 0.92135, bot_str = 1.47365, up_str = 0.89836, low_str = 1.29764, geometry = geometry_input, tag="Fuselage")
-add_general_xsec(x_location =  15.46509, z_location = 0.41352, height = 1.3, width = 3.0, max_width_loc = 0.1, top_tan_angle = 34.36364,
+add_general_xsec(x_location =  7.72401, z_location =  0.49488, height = 1.32415, width = 3.5, max_width_loc = 0.03636, top_tan_angle = 50.31818,
+                 bot_tan_angle = 72.81818, top_str = 0.92135, bot_str = 1.47365, up_str = 0.89836, low_str = 1.29764, geometry = geometry_input, tag="Fuselage")
+add_general_xsec(x_location =  9.20970, z_location =  0.48059, height = 1.42601, width = 3.5, max_width_loc = 0.03636, top_tan_angle = 61.77273, 
+                 bot_tan_angle = 72.81818, top_str = 0.92135, bot_str = 1.47365, up_str = 0.89836, low_str = 1.29764, geometry = geometry_input, tag="Fuselage")
+add_general_xsec(x_location =  15.46509, z_location = 0.41352, height = 1.3, width = 3.5, max_width_loc = 0.1, top_tan_angle = 34.36364,
                  bot_tan_angle = 53.59091, top_str = 0.83, bot_str = 0.83, up_str = 0.83, low_str = 0.83, geometry = geometry_input, tag="Fuselage")
 add_point_xsec(x_location = 15.46509, z_location =  0.38957, geometry = geometry_input, tag="Fuselage")
 #Add Airfoils to Wing
