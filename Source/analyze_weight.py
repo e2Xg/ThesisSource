@@ -5,7 +5,7 @@ from scipy.optimize import minimize_scalar
 from Source.FLOPS_Weight.FLOPS_weight import FLOPS_weight
 
 def analyze_weight(
-            TR,SPAN,SW,ETR,ESPAN,ESW,TCA,
+            TR,SPAN,SW,TCA,
             QC_SWEEP,ULF,PCTL,SFLAP,NEW,
             XL,FNEF,SHT,NVERT,TRVT,
             SVT,ARVT,SWPVT,SCAN,TRCAN,
@@ -23,9 +23,6 @@ def analyze_weight(
         >>> TR : Taper ratio of the wing
         >>> SPAN : Wing span (m)
         >>> SW : Reference wing area (m**2)
-        >>> ETR : Exposed taper ratio of the wing
-        >>> ESPAN : Exposed wing span (m)
-        >>> ESW : Exposed wing area (m**2)
         >>> TCA : Weighted average of the wing thickness to chord ratio
         >>> QC_SWEEP : Quarter chord sweep angle of the wing (deg)
         >>> ULF : Structual ultimate load factor
@@ -74,7 +71,7 @@ def analyze_weight(
         >>> UP_BOUND : Upper bound of weight limit
      """
     #Find minimum of weight function
-    args = (    TR,SPAN,SW,ETR,ESPAN,ESW,TCA,
+    args = (    TR,SPAN,SW,TCA,
                 QC_SWEEP,ULF,PCTL,SFLAP,NEW,
                 XL,FNEF,SHT,NVERT,TRVT,
                 SVT,ARVT,SWPVT,SCAN,TRCAN,
