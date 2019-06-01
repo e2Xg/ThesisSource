@@ -17,6 +17,7 @@ def climb(mach, altitude0, altitude1, setting, reference_area, ac_weight, engine
     SEP_ = []
     mach_list = []
     mach_check = 0.4
+    if altitude >= altitude1: return ac_weight, fuel, x/1000.0, time, mach, altitude1
     while mach_check < max(aerodynamic_data["MACH"].unique()):
         sos, rho, mu = standard_atmosphere(altitude)
         FF , NPF = engine_performance(engine_input, num_eng, altitude, mach_check, setting)
