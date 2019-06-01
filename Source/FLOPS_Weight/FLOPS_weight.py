@@ -28,7 +28,7 @@ from Source.FLOPS_Weight.Operating.FLOPS_engine_oil import FLOPS_engine_oil
 from Source.FLOPS_Weight.Operating.FLOPS_wing_fuel import FLOPS_wing_fuel
 
 def FLOPS_weight(
-            DG,TR,SPAN,SW,ETR,ESPAN,ESW,TCA,
+            DG,TR,SPAN,SW,TCA,
             QC_SWEEP,ULF,PCTL,SFLAP,NEW,
             XL,FNEF,SHT,NVERT,TRVT,
             SVT,ARVT,SWPVT,SCAN,TRCAN,
@@ -47,9 +47,6 @@ def FLOPS_weight(
         >>> TR : Taper ratio of the wing
         >>> SPAN : Wing span (m)
         >>> SW : Reference wing area (m**2)
-        >>> ETR : Exposed taper ratio of the wing
-        >>> ESPAN : Exposed wing span (m)
-        >>> ESW : Exposed wing area (m**2)
         >>> TCA : Weighted average of the wing thickness to chord ratio
         >>> QC_SWEEP : Quarter chord sweep angle of the wing (deg)
         >>> ULF : Structual ultimate load factor
@@ -96,7 +93,7 @@ def FLOPS_weight(
         >>> NTANK : Number of Fuel Tanks
      """
     #Toal Fuel Weight
-    WWINGFUEL = FLOPS_wing_fuel(ESW,TCA,ETR,ESPAN,FULDEN = 1.0, FWMAX = 23.0)
+    WWINGFUEL = FLOPS_wing_fuel(SW,TCA,TR,SPAN,FULDEN = 1.0, FWMAX = 7.0)
     WFUSFUEL = TOTVOLFUSF*FUELDENSITY
     
     WFUEL = WFUSFUEL + WWINGFUEL
