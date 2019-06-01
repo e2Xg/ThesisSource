@@ -26,7 +26,7 @@ design_input = design_input(
         CGX = 50.0,
         AC = -5.0,
         Vc = 0.0,
-        Vht = 0.3,
+        Vht = 0.15,
         Vvt = 0.04
         )
 
