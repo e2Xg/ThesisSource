@@ -24,10 +24,10 @@ if __name__ == "__main__":
     point_performance_input = load('point_performance_input.pydata')
     
     variables = [
-            10.463,
-            5.015,
-            0.167,
-            49.975 ]
+            9.0,
+            8.0,
+            0.25,
+            35.0 ]
     
     sized_geometry_input, sized_geometry_data, sized_weight_data, sized_aerodynamic_data, sized_point_performance_data = aircraft_objective_function(variables,
                                              design_input,
