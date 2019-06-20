@@ -23,11 +23,11 @@ design_input = design_input(
         main_sys_vol = 9.295 + (15.46509 - 3.0 - 6.23832)*1.86,
         base_area = 0.25,
         EWD = 2.0,
-        CGX = 50.0,
+        CGX = 52.0,
         AC = -5.0,
         Vc = 0.0,
-        Vht = 0.15,
-        Vvt = 0.04
+        Vht = 0.2,
+        Vvt = 0.05
         )
 
 save('F15class_design_input.pydata', design_input)
