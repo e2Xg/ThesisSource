@@ -40,8 +40,10 @@ def analyze_sizing(design_input,geometry_input,engine_input,mission_input,skippr
             args=(design_input,geometry_input,engine_input,mission_input),
             options = {'maxiter': 10}
             )
-    function_size(sol.x,design_input,geometry_input,engine_input,mission_input)
     modified_geometry_input = size_fuselage(sol.x,geometry_input)
+    for tag in geometry_input.keys():
+        if geometry_input[tag]["Type"] == "Fuselage":
+            modified_geometry_input[tag]["Nozzle Area Location"] += sol.x
     modified_geometry_input = move_wing(modified_geometry_input,design_input)
     modified_geometry_input = size_tails(sol.x,modified_geometry_input,design_input)
     return modified_geometry_input
