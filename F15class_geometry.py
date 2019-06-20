@@ -41,22 +41,22 @@ add_point_xsec(x_location = 15.46509, z_location =  0.38957, geometry = geometry
 #Add Airfoils to Wing
 from Source.Geometry.Input.airfoil_lib import naca64A205, naca64A204, biconvex5005
 naca64A205_x, naca64A205_z, naca64A205_xc, naca64A205_c, naca64A205_xt, naca64A205_t = naca64A205() 
-add_airfoil(x_location = 6.873, y_location = 1.500, z_location = 0.4, x_c_coords = naca64A205_x, z_c_coords = naca64A205_z, xc_c_coords = naca64A205_xc, 
+add_airfoil(x_location = 6.873, y_location = 1.7500, z_location = 0.4, x_c_coords = naca64A205_x, z_c_coords = naca64A205_z, xc_c_coords = naca64A205_xc, 
                            c_c_coords = naca64A205_c, xt_c_coords = naca64A205_xt, t_c_coords = naca64A205_t, chord_length = 5.59767, geometry = geometry_input, tag="Wing")
 naca64A204_x, naca64A204_z, naca64A204_xc, naca64A204_c, naca64A204_xt, naca64A204_t = naca64A204() 
-add_airfoil(x_location = 10.302588, y_location = 1.500 + 4.89796, z_location = 0.4, x_c_coords = naca64A204_x, z_c_coords = naca64A204_z, xc_c_coords = naca64A204_xc,
+add_airfoil(x_location = 10.302588, y_location = 1.7500 + 4.89796, z_location = 0.4, x_c_coords = naca64A204_x, z_c_coords = naca64A204_z, xc_c_coords = naca64A204_xc,
             c_c_coords = naca64A204_c, xt_c_coords = naca64A204_xt, t_c_coords = naca64A204_t, chord_length = 1.39942, geometry = geometry_input, tag="Wing")
 #Add Airfoils to HTail
 biconvex5005_x, biconvex5005_z, biconvex5005_xc, biconvex5005_c, biconvex5005_xt, biconvex5005_t = biconvex5005() 
-add_airfoil(x_location = 13.0, y_location = 1.500, z_location = 0.4, x_c_coords = biconvex5005_x, z_c_coords = biconvex5005_z, xc_c_coords = biconvex5005_xc,
+add_airfoil(x_location = 13.0, y_location = 1.7500, z_location = 0.4, x_c_coords = biconvex5005_x, z_c_coords = biconvex5005_z, xc_c_coords = biconvex5005_xc,
             c_c_coords = biconvex5005_c, xt_c_coords = biconvex5005_xt, t_c_coords = biconvex5005_t, chord_length = 3.48980, geometry = geometry_input, tag="Horizontal Tail")
-add_airfoil(x_location = 14.5, y_location = 1.500 + 2.5, z_location = 0.4, x_c_coords = biconvex5005_x, z_c_coords = biconvex5005_z, xc_c_coords = biconvex5005_xc,
+add_airfoil(x_location = 14.5, y_location = 1.7500 + 2.5, z_location = 0.4, x_c_coords = biconvex5005_x, z_c_coords = biconvex5005_z, xc_c_coords = biconvex5005_xc,
             c_c_coords = biconvex5005_c, xt_c_coords = biconvex5005_xt, t_c_coords = biconvex5005_t, chord_length = 1.0, geometry = geometry_input, tag="Horizontal Tail")
 #Add Airfoils to VTail 1
 biconvex5005_x, biconvex5005_z, biconvex5005_xc, biconvex5005_c, biconvex5005_xt, biconvex5005_t = biconvex5005()
-add_airfoil(x_location = 13.0, y_location = 1.1, z_location = 0.6, x_c_coords = biconvex5005_x, z_c_coords = biconvex5005_z, xc_c_coords = biconvex5005_xc,
+add_airfoil(x_location = 13.0, y_location = 1.3, z_location = 0.8, x_c_coords = biconvex5005_x, z_c_coords = biconvex5005_z, xc_c_coords = biconvex5005_xc,
             c_c_coords = biconvex5005_c, xt_c_coords = biconvex5005_xt, t_c_coords = biconvex5005_t, chord_length = 2.73616, geometry = geometry_input, tag="Vertical Tail 1")
-add_airfoil(x_location = 14.5, y_location = 1.1 + 2.59013, z_location = 0.6, x_c_coords = biconvex5005_x, z_c_coords = biconvex5005_z, xc_c_coords = biconvex5005_xc,
+add_airfoil(x_location = 14.5, y_location = 1.3 + 2.59013, z_location = 0.8, x_c_coords = biconvex5005_x, z_c_coords = biconvex5005_z, xc_c_coords = biconvex5005_xc,
             c_c_coords = biconvex5005_c, xt_c_coords = biconvex5005_xt, t_c_coords = biconvex5005_t, chord_length = 1.10492, geometry = geometry_input, tag="Vertical Tail 1")
 #Add Airfoils to VTail 2
 add_airfoil(x_location = 13.0, y_location = -1.1, z_location = 0.4, x_c_coords = biconvex5005_x, z_c_coords = biconvex5005_z, xc_c_coords = biconvex5005_xc,
