@@ -32,10 +32,9 @@ def analyze_sizing(design_input,geometry_input,engine_input,mission_input,skippr
     for tag in geometry_input.keys():
         if geometry_input[tag]["Type"] == "Fuselage":
             PLxi = int(len(geometry_input[tag]["Xsec"]["X-Location"])/2)
-            NegativeBound = -1.0*(abs(geometry_input[tag]["Xsec"].loc[PLxi-1,"X-Location"] - geometry_input[tag]["Xsec"].loc[PLxi,"X-Location"])-0.1)
     sol = minimize_scalar(
             function_size,
-            bounds=(NegativeBound, 8.0),
+            bounds=(0.0, 8.0),
             method='bounded',
             args=(design_input,geometry_input,engine_input,mission_input),
             options = {'maxiter': 10}
