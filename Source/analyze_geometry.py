@@ -149,4 +149,13 @@ def analyze_geometry(geometry_input):
                     geometry_data[tag]["Data"].loc["Exposed Planform MAC Location","Value"],
                     geometry_data[tag]["Data"].loc["Exposed Planform Area","Value"]
                     )
+            
+    for tag in geometry_data.keys():
+        if geometry_data[tag]["Type"] == "Wing":
+            AR = geometry_data[tag]["Data"].loc["Planform Aspect Ratio","Value"]
+            QC_SWEEP = geometry_data[tag]["Data"].loc["Exposed Planform Quarter-Chord Sweep Angle","Value"]
+            AR_Max = 10.0**(0.842-0.435*np.tan(np.deg2rad(QC_SWEEP)))
+            Delta_AR = AR_Max - AR
+            geometry_data[tag]["Data"].loc["Pitch-up Tendency Chart Aspect Ratio","Value"] = AR_Max
+            geometry_data[tag]["Data"].loc["Pitch-up Tendency Chart Aspect Ratio Difference","Value"] = Delta_AR
     return geometry_data

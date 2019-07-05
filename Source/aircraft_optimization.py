@@ -6,7 +6,7 @@ from platypus import NSGAII, Problem, Real, ProcessPoolEvaluator
 from Source.Optimization.optimization_objectives import optimization_objectives
 
 def aircraft_optimization(design_input, geometry_input, engine_input, mission_input, point_performance_input, numcore = 4, iterations = 1000):
-    problem = Problem(4,2,3)
+    problem = Problem(4,2,2)
     problem.types[:] = [
                 Real(8.0, 12.5),
                 Real(5.0, 8.0),
@@ -15,8 +15,7 @@ def aircraft_optimization(design_input, geometry_input, engine_input, mission_in
                 ]
     problem.constraints[:] = [
                 ">=1.0",
-                "<=-14.0",
-                ">=0.0"
+                "<=-14.0"
                 ]
     problem.directions[:] = Problem.MAXIMIZE
     problem.function = functools.partial(
