@@ -89,9 +89,9 @@ if __name__ == "__main__":
         print("Design {} Saved.".format(i+1))
         lines.append("LENGTH;FUSE_MAX_CSA;B;CR;TR;SWEEP;AREA;AR;WEIGHT;USABLE_FUEL;SUPM;SUSG;ITR;MMACH;SEP;ACC;TAKEOFF;LANDING\n")
         for tag in sized_geometry_data.keys():
-            if sized_geometry_data[tag]["Type"] == "FUSELAGE":
+            if sized_geometry_data[tag]["Type"] == "Fuselage":
                 LENGTH = sized_geometry_data[tag]["Data"].loc["Length","Value"]
-                FUSE_MAX_CSA = max(sized_geometry_data[tag]["Data"].loc["Area Distribution","Value"])
+                FUSE_MAX_CSA = max(sized_geometry_data[tag]["Data"].loc["Area Distribution","Value"][:,1])
             if sized_geometry_data[tag]["Type"] == "Wing":
                 B = sized_geometry_data[tag]["Data"].loc["Planform Span","Value"]
                 CR = sized_geometry_data[tag]["Data"].loc["Planform Root Chord Length","Value"]
