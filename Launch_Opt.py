@@ -70,7 +70,7 @@ if __name__ == "__main__":
     #Run each case again to save results
     vsppath = "D:\VSP\\vspscript.exe"
     lines = []
-    lines.append("LENGTH;FUSE_MAX_CSA;B;CR;TR;SWEEP;AREA;AR;WEIGHT;USABLE_FUEL;SUPM;SUSG;ITR;MMACH;SEP;ACC;TAKEOFF;LANDING\n")
+    lines.append("DESIGN;LENGTH;FUSE_MAX_CSA;B;CR;TR;SWEEP;AREA;AR;WEIGHT;USABLE_FUEL;SUPM;SUSG;ITR;MMACH;SEP;ACC;TAKEOFF;LANDING\n")
     for i in range(len(resultslines)-1):
         result = resultslines[i+1].split(";")
         variables = [
@@ -109,7 +109,7 @@ if __name__ == "__main__":
         ACC = sized_point_performance_data.loc["ACCELERATE","Value"]
         TAKEOFF = sized_point_performance_data.loc["TAKEOFF","Value"]
         LANDING = sized_point_performance_data.loc["LANDING","Value"]
-        lines.append("{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f}\n".format(LENGTH,FUSE_MAX_CSA,B,CR,TR,SWEEP,AREA,AR,WEIGHT,USABLE_FUEL,SUPM,SUSG,ITR,MMACH,SEP,ACC,TAKEOFF,LANDING))
+        lines.append("{};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f}\n".format(i+1,LENGTH,FUSE_MAX_CSA,B,CR,TR,SWEEP,AREA,AR,WEIGHT,USABLE_FUEL,SUPM,SUSG,ITR,MMACH,SEP,ACC,TAKEOFF,LANDING))
     file = open("optimization_detailed_results.csv","w")
     for line in lines: file.write(line)
     file.close()
