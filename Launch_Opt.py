@@ -38,7 +38,7 @@ if __name__ == "__main__":
     del end
     
     file = open("optimization_results.csv","w")
-    file.write("EXPOSED SPAN;EXPOSED CR;EXPOSED TR;SWEEP;SUPM;SUSG;TIP CHORD;TE SWEEP;PITCHUP\n")
+    file.write("EXPOSED SPAN;EXPOSED CR;EXPOSED TR;SWEEP;SUPM;SUSG;TIP CHORD;TE SWEEP\n")
     for result in optimization_results.result:
         B = result.variables[0]
         CR = result.variables[1]
@@ -48,8 +48,7 @@ if __name__ == "__main__":
         SUSG = result.objectives[1]
         CT = result.constraints[0]
         TESWEEP = result.constraints[1]
-        AAR = result.constraints[2]
-        file.write("{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f}\n".format(B,CR,TR,SWEEP,SUPM,SUSG,CT,TESWEEP,AAR))
+        file.write("{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f}\n".format(B,CR,TR,SWEEP,SUPM,SUSG,CT,TESWEEP))
     file.close()
     
     #PLOT
@@ -70,6 +69,7 @@ if __name__ == "__main__":
     resultslines = results.readlines()
     #Run each case again to save results
     vsppath = "D:\VSP\\vspscript.exe"
+    lines = []
     for i in range(len(resultslines)-1):
         result = resultslines[i+1].split(";")
         variables = [
@@ -87,4 +87,30 @@ if __name__ == "__main__":
                                                  plotac = False)
         postprocess("Design"+str(i+1),design_input,sized_geometry_input,engine_input,mission_input,point_performance_input,vsppath)
         print("Design {} Saved.".format(i+1))
+        lines.append("LENGTH;FUSE_MAX_CSA;B;CR;TR;SWEEP;AREA;AR;WEIGHT;USABLE_FUEL;SUPM;SUSG;ITR;MMACH;SEP;ACC;TAKEOFF;LANDING\n")
+        for tag in sized_geometry_data.keys():
+            if sized_geometry_data[tag]["Type"] == "FUSELAGE":
+                LENGTH = sized_geometry_data[tag]["Data"].loc["Length","Value"]
+                FUSE_MAX_CSA = max(sized_geometry_data[tag]["Data"].loc["Area Distribution","Value"])
+            if sized_geometry_data[tag]["Type"] == "Wing":
+                B = sized_geometry_data[tag]["Data"].loc["Planform Span","Value"]
+                CR = sized_geometry_data[tag]["Data"].loc["Planform Root Chord Length","Value"]
+                TR = sized_geometry_data[tag]["Data"].loc["Planform Taper Ratio","Value"]
+                SWEEP = sized_geometry_data[tag]["Data"].loc["Planform Leading-Edge Sweep Angle","Value"]
+                AREA = sized_geometry_data[tag]["Data"].loc["Planform Area","Value"]
+                AR = sized_geometry_data[tag]["Data"].loc["Planform Aspect Ratio","Value"]
+        WEIGHT = sized_weight_data.loc["Design Mission Takeoff Weight","Initial Value"]
+        USABLE_FUEL = sized_weight_data.loc["Total Usable Fuel","Initial Value"]
+        SUPM = sized_point_performance_data.loc["SUPERCRUISE_MACH_NUMBER","Value"]
+        SUSG = sized_point_performance_data.loc["SUSTAINED_TURN (g)","Value"]
+        ITR = sized_point_performance_data.loc["INSTANTANEOUS_TURN (deg/s)","Value"]
+        MMACH = sized_point_performance_data.loc["MAXIMUM_MACH_NUMBER","Value"]
+        SEP = sized_point_performance_data.loc["SEP","Value"]
+        ACC = sized_point_performance_data.loc["ACCELERATE","Value"]
+        TAKEOFF = sized_point_performance_data.loc["TAKEOFF","Value"]
+        LANDING = sized_point_performance_data.loc["LANDING","Value"]
+        lines.append("{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f};{:.3f}\n".format(LENGTH,FUSE_MAX_CSA,B,CR,TR,SWEEP,AREA,AR,WEIGHT,USABLE_FUEL,SUPM,SUSG,ITR,MMACH,SEP,ACC,TAKEOFF,LANDING))
+    file = open("optimization_detailed_results.csv","w")
+    for line in lines: file.write(line)
+    file.close()
 
