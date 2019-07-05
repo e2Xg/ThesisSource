@@ -70,6 +70,7 @@ if __name__ == "__main__":
     #Run each case again to save results
     vsppath = "D:\VSP\\vspscript.exe"
     lines = []
+    lines.append("LENGTH;FUSE_MAX_CSA;B;CR;TR;SWEEP;AREA;AR;WEIGHT;USABLE_FUEL;SUPM;SUSG;ITR;MMACH;SEP;ACC;TAKEOFF;LANDING\n")
     for i in range(len(resultslines)-1):
         result = resultslines[i+1].split(";")
         variables = [
@@ -87,7 +88,6 @@ if __name__ == "__main__":
                                                  plotac = False)
         postprocess("Design"+str(i+1),design_input,sized_geometry_input,engine_input,mission_input,point_performance_input,vsppath)
         print("Design {} Saved.".format(i+1))
-        lines.append("LENGTH;FUSE_MAX_CSA;B;CR;TR;SWEEP;AREA;AR;WEIGHT;USABLE_FUEL;SUPM;SUSG;ITR;MMACH;SEP;ACC;TAKEOFF;LANDING\n")
         for tag in sized_geometry_data.keys():
             if sized_geometry_data[tag]["Type"] == "Fuselage":
                 LENGTH = sized_geometry_data[tag]["Data"].loc["Length","Value"]
