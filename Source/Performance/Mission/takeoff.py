@@ -23,10 +23,10 @@ def takeoff(altitude, cl_max, setting, mu, reference_area, ac_weight, engine_inp
                     aerodynamic_data,
                     cl = cl_max,
                     design_cl = design_input.loc["Design Lift Coefficient","Value"],
-                    mach = mach_to,
+                    mach = mach,
                     altitude = altitude,
                     reference_area = reference_area)
-        a = (NPF - drag - mu*(cl_max*((0.5*rho*((mach*sos)**2)))-ac_weight*9.81))/ac_weight
+        a = (NPF - drag - mu*(ac_weight*9.81-cl_max*((0.5*rho*((mach*sos)**2)))))/ac_weight
         if (mach*sos + a*dt)/sos > mach_to: dt = (mach_to*sos - mach*sos)/a
         if (mach*sos + a*dt)/sos <= mach: break
         time += dt
