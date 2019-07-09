@@ -24,8 +24,8 @@ if __name__ == "__main__":
     point_performance_input = load('point_performance_input.pydata')
     
     variables = [
-            8.0,
             6.0,
+            4.0,
             0.25,
             35.0 ]
     
