@@ -13,6 +13,7 @@ def fly_setting(mach, altitude, distance, setting, reference_area, ac_weight, en
     fuel = 0.0
     time = 0.0
     while x < distance:
+        mach_old = mach
         cl = (ac_weight*9.81)/(reference_area*0.5*rho*((mach*sos)**2))
         drag, CD0, K = total_drag_estimation(
                 aerodynamic_data,
@@ -29,6 +30,6 @@ def fly_setting(mach, altitude, distance, setting, reference_area, ac_weight, en
         time += dt
         ac_weight -= FF*dt
         fuel += FF*dt
-        x += mach*sos*dt
+        x += ((mach+mach_old)/2.0)*sos*dt
     return ac_weight, fuel, x/1000.0, time, mach, altitude
 

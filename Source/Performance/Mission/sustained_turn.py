@@ -26,6 +26,7 @@ def sustained_turn(mach, altitude, numpi, setting, reference_area, ac_weight, en
     fuel = 0.0
     time = 0.0
     pi_ = 0.0
+    turn_rate = 0.0
     FF , NPF = engine_performance(engine_input, num_eng, altitude,mach,setting)
     sos, rho, mu = standard_atmosphere(altitude)
     while pi_ < numpi*np.pi:
@@ -48,20 +49,21 @@ def sustained_turn(mach, altitude, numpi, setting, reference_area, ac_weight, en
                 mach = mach,
                 altitude = altitude,
                 reference_area = reference_area)
+        turn_rate_old = turn_rate
         turn_rate = 9.81*np.sqrt(n**2.0-1.0)/(mach*sos)
-        if pi_ + turn_rate*dt > numpi*np.pi: dt = (numpi*np.pi - pi_)/turn_rate
-        if pi_ + turn_rate*dt <= pi_: break
+        if pi_ + ((turn_rate+turn_rate_old)/2.0)*dt > numpi*np.pi: dt = (numpi*np.pi - pi_)/((turn_rate+turn_rate_old)/2.0)
+        if pi_ + ((turn_rate+turn_rate_old)/2.0)*dt <= pi_: break
         R = ((mach*sos)**2.0)/(9.81*np.sqrt(n**2.0-1.0))
         time += dt
         ac_weight -= FF*dt
         fuel += FF*dt
         pi_ += turn_rate*dt
         if pi_ % (2.0 * np.pi) <= np.pi/2.0:
-            x += R*np.sin(turn_rate*dt)
+            x += R*np.sin(((turn_rate+turn_rate_old)/2.0)*dt)
         elif pi_ % (2.0 * np.pi) <= np.pi and pi_ % (2.0 * np.pi) > np.pi/2.0:
-            x -= R*np.sin(turn_rate*dt)
+            x -= R*np.sin(((turn_rate+turn_rate_old)/2.0)*dt)
         elif pi_ % (2.0 * np.pi) >= np.pi and pi_ % (2.0 * np.pi) < 1.5*np.pi:
-            x -= R*np.sin(turn_rate*dt)
+            x -= R*np.sin(((turn_rate+turn_rate_old)/2.0)*dt)
         else:
-            x += R*np.sin(turn_rate*dt)
+            x += R*np.sin(((turn_rate+turn_rate_old)/2.0)*dt)
     return ac_weight, fuel, x/1000.0, time, mach, altitude

@@ -12,6 +12,7 @@ def instantaneous_turn(mach, altitude, numpi, clmax, setting, reference_area, ac
     fuel = 0.0
     time = 0.0
     pi_ = 0.0
+    turn_rate = 0.0
     while pi_ < numpi*np.pi:
         sos, rho, mu = standard_atmosphere(altitude)
         dp = 0.5*rho*((mach*sos)**2)
@@ -27,10 +28,11 @@ def instantaneous_turn(mach, altitude, numpi, clmax, setting, reference_area, ac
                 altitude = altitude,
                 reference_area = reference_area)
         FF , NPF = engine_performance(engine_input, num_eng, altitude,mach,setting)
+        turn_rate_old = turn_rate
         turn_rate = 9.81*np.sqrt(n**2.0-1.0)/(mach*sos)
         T = NPF - drag
-        if pi_ + turn_rate*dt > numpi*np.pi: dt = (numpi*np.pi - pi_)/turn_rate
-        if pi_ + turn_rate*dt <= pi_: break
+        if pi_ + ((turn_rate+turn_rate_old)/2.0)*dt > numpi*np.pi: dt = (numpi*np.pi - pi_)/((turn_rate+turn_rate_old)/2.0)
+        if pi_ + ((turn_rate+turn_rate_old)/2.0)*dt <= pi_: break
         R = ((mach*sos)**2.0)/(9.81*np.sqrt(n**2.0-1.0))
         time += dt
         T_W = T/W
@@ -46,12 +48,12 @@ def instantaneous_turn(mach, altitude, numpi, clmax, setting, reference_area, ac
         ac_weight -= FF*dt
         fuel += FF*dt
         if pi_ % (2.0 * np.pi) <= np.pi/2.0:
-            x += R*np.sin(turn_rate*dt)
+            x += R*np.sin(((turn_rate+turn_rate_old)/2.0)*dt)
         elif pi_ % (2.0 * np.pi) <= np.pi and pi_ % (2.0 * np.pi) > np.pi/2.0:
-            x -= R*np.sin(turn_rate*dt)
+            x -= R*np.sin(((turn_rate+turn_rate_old)/2.0)*dt)
         elif pi_ % (2.0 * np.pi) >= np.pi and pi_ % (2.0 * np.pi) < 1.5*np.pi:
-            x -= R*np.sin(turn_rate*dt)
+            x -= R*np.sin(((turn_rate+turn_rate_old)/2.0)*dt)
         else:
-            x += R*np.sin(turn_rate*dt)
-        pi_ += turn_rate*dt
+            x += R*np.sin(((turn_rate+turn_rate_old)/2.0)*dt)
+        pi_ += ((turn_rate+turn_rate_old)/2.0)*dt
     return ac_weight, fuel, x/1000.0, time, mach, altitude
