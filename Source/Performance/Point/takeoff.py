@@ -16,6 +16,7 @@ def takeoff(altitude, cl_max, setting, mu, reference_area, ac_weight, engine_inp
     num_eng = design_input.loc["Total Number of Engines","Value"]
     mach_to = 1.1*stall_speed/sos
     while mach < mach_to:
+        mach_old = mach
         FF , NPF = engine_performance(engine_input, num_eng, altitude, mach, setting)
         drag, CD0, K = total_drag_estimation(
                     aerodynamic_data,
@@ -28,7 +29,7 @@ def takeoff(altitude, cl_max, setting, mu, reference_area, ac_weight, engine_inp
         if (mach*sos + a*dt)/sos > mach_to: dt = (mach_to*sos - mach*sos)/a
         if (mach*sos + a*dt)/sos <= mach: break
         mach = (mach*sos + a*dt)/sos
-        x += mach*sos*dt
+        x += ((mach+mach_old)/2.0)*sos*dt
     #Transition & Climb
     R = 0.205*stall_speed**2
     climb_grad = (NPF-drag)/(ac_weight*9.81)

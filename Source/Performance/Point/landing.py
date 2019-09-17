@@ -48,9 +48,10 @@ def landing(altitude, cl_max, setting, mu, reference_area, ac_weight, engine_inp
                 reference_area = reference_area)
     x += mach*sos*3.0 #3 sec of free roll
     while mach > 0.0:
+        mach_old = mach
         a = (NPF - drag - mu*(ac_weight*9.81-cl_max*((0.5*rho*((mach*sos)**2)))))/ac_weight
         if (mach*sos + a*dt)/sos < 0.0: dt = (0.0*sos - mach*sos)/a
         if (mach*sos + a*dt)/sos >= mach: break
         mach = (mach*sos + a*dt)/sos
-        x += mach*sos*dt
+        x += ((mach+mach_old)/2.0)*sos*dt
     return x
